@@ -1,6 +1,5 @@
-# wordle
+# Wordle
 
-Empty project.
 
 ## Building and running on localhost
 
@@ -22,10 +21,10 @@ To create a development build:
 npm run build-dev
 ```
 
-## Running
+## Running local dev server
 
 ```sh
-node dist/bundle.js
+npx webpack serve --mode production
 ```
 
 ## Testing
