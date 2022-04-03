@@ -46,6 +46,7 @@ const config = {
     new HtmlWebpackPlugin({
       templateContent: ({ htmlWebpackPlugin }) => `
       <!DOCTYPE html><html>
+      -----INSERT_INLINED_CSS_HERE-----
       <head>
       ${robotoAsyncGoogleFontLink}
       <meta charset=\"utf-8\">
@@ -58,7 +59,11 @@ const config = {
       leaveCSSFile: true,
       styleTagFactory: ({ style }) => {
         return `<style class="inline-css">${style}</style>`;
-      }
+      },
+      replace: {
+        removeTarget: true,
+        target: '-----INSERT_INLINED_CSS_HERE-----',
+      },
     }),
     new LodashModuleReplacementPlugin,
     new BundleAnalyzerPlugin({
