@@ -3,15 +3,16 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const robotoAsyncGoogleFontLink = `<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></link>`;
+const robotoAsyncGoogleFontLink = `<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></link>`;
 
 const config = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -43,7 +44,17 @@ const config = {
       filename: 'index.html',
     }),
     new LodashModuleReplacementPlugin,
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      insert: function(linkTag) {
+        linkTag.media="print";
+        linkTag.addEventListener('load', () => {
+          linkTag.removeAttribute('media');
+          linkTag.dataset.mediaAttrRemoved = '';
+        });
+        document.head.appendChild(linkTag);
+      },
+      filename: '[name].[chunkhash].css',
+    }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
