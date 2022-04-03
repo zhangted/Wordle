@@ -1,0 +1,62 @@
+@import './mixins.scss';
+
+:root {
+    --font: Roboto;
+    --main-bg-color: #202020;
+    --secondary-bg-color: #e8e8e8;
+    --main2-bg-color: #111111;
+    --cell-color: #8D8D8D;
+    --unevaluated-color: black;
+    --evaluated-color: #76B947;
+    --evaluted-soft-match-color: #ffd102;
+    --evaluted-no-match-color: #8D8D8D50;
+    --board-width: 400px;
+    --keyboard-width: 440px;
+    --font-size: 18px;
+    --key-width: calc(var(--keyboard-width) / 13);
+    --key-right-margin: 6px;
+}
+  
+@media only screen and (max-width: 820px) {
+    :root {
+      --board-width: 360px;
+      --keyboard-width: 360px;
+      --key-width: calc(var(--keyboard-width) / 12.5);
+      --key-right-margin: 3px;
+      --font-size: 20px;
+    }
+}
+  
+:root {
+    --cell-width: calc(var(--board-width) / 5.4);
+}
+  
+  
+body {
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: var(--font-size);
+    color: var(--secondary-bg-color);
+    background-color: var(--main-bg-color);
+}
+  
+#board {
+    width: var(--board-width);
+    border-radius: 8px;
+    @include centerComponent;
+}
+  
+#popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    padding: 0px;
+    background-color: var(--main2-bg-color);
+    color: var(--secondary-bg-color);
+    width: 200px;
+    text-align: center;
+    @include modal-shadow;
+}

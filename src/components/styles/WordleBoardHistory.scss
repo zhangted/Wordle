@@ -1,0 +1,31 @@
+@import './mixins.scss';
+
+#wordleHistory {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 10px;
+    border-radius: 5px;
+    padding: 0px;
+    top: 43.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: var(--main2-bg-color);
+    color: var(--secondary-bg-color);
+    width: var(--keyboard-width);
+    text-align: center;
+    @include modal-shadow;
+}
+span.history-cell {
+    font-size: 14px;
+    font-weight: 100;
+    display: inline-block;
+    width: 13px;
+}
+.closeButton {
+    @include menu-button-base;
+    @include hover-button;
+}

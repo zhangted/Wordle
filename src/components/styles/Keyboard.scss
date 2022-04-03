@@ -1,0 +1,37 @@
+@import './mixins.scss';
+
+#keyboard {
+    width: var(--keyboard-width);
+    margin-top: 30px;
+    padding: 20px 8px;
+    border-radius: 4px;
+    background-color: var(--unevaluated-color);
+  
+    @include centerComponent;
+}
+.key-row {
+    max-width: var(--keyboard-width);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto 7px;
+    line-height: var(--key-width);
+  }
+  .key {
+    margin: 0 var(--key-right-margin) 0 0; 
+    text-align: center;
+    background: var(--cell-color);
+    color: var(--unevaluated-color);
+    border-radius: 4px;
+    box-shadow: 0 1px 0 #222, inset 0 1px 3px rgba(255,255,255,0.1);
+    align-items:center;
+    align-content:center;
+    min-height: var(--key-width);
+    border: 2px solid rgba(0,0,0,0.08);
+    min-width: var(--key-width);
+    cursor: pointer;
+    &:hover {
+      background: var(--secondary-bg-color);
+    }
+  }
